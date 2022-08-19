@@ -1,0 +1,11 @@
+---
+title: "xG vs Possesion"
+author: "Nicolas Escobar"
+date: "8/19/2022"
+categories: [soccer, analytics, xG]
+---
+
+# Intro 
+
+There are more things in heaven 
+

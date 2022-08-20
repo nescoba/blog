@@ -4,12 +4,12 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "About this blog"
+    "text": "First, it’s the total xG accumulated by Sergio Aguero playing for Manchester City between the 2017-2018 and the 2021-2022 seasons. Those are just the seasons for which xG is available for his career in that team, as can be found here. That tells you right away that this blog is mostly about soccer analytics.\nIt’s a funny kind of soccer analytics, though. The thing is that I’m not a soccer expert, by any stretch. Nor am I an analytics expert either. I’m just a Ph.D. student in Statistics with a passing interest in soccer, and as such I’m on a journey, improving my quantitative skills and getting to know the sport better. So this blog is mostly that: me practicing some R, some plots and perhaps some models, using soccer data.\nSecond, it is of course a nod to FiveThirtyEight. I love FiveThirtyEight, ever since I was in Colombia practicing my English and obsessing about the 2016 U.S. presidential election. It does a lot of things right. But as a Stats student, I just find the coverage on the site a little lacking. Their articles mostly use descriptive statistics, and if there is a regression here and there, it’s an OLS one with two variables. That’s understandable, of course. It intends to be written for general audience. But after a while I just wanted a little more. So you will see this site using just slightly more advanced Exploratory Data Analysis techniques. Nothing too fancy, just boxplots and GLMs mostly.\nThat’s it. Thank you for reading and I hope you enjoy the content."
   },
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "blog",
+    "title": "Blog",
     "section": "",
     "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nsoccer\n\n\nanalytics\n\n\nxG\n\n\n\n\nxG has changed the soccer analytics landscape, there is no question about it. It’s such a good metric. It’s easy to explain and it is widely available. It has allowed us to quantify offensive output and by doing so, it has advanced our understanding of all aspects of the game. It’s also so intuitive that it has gone mainstream. It’s now part of the conversation in regular soccer coverage.\n\n\n\n\n\n\nAug 19, 2022\n\n\nNicolas Escobar\n\n\n\n\n\n\nNo matching items"
   },

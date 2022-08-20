@@ -64,11 +64,14 @@ top10 %>%
 ```{r}
 #| echo: false
 #| warning: false
+#| output: false
 
 ggplot(top10, aes(x = team, y = xG, fill = team)) +
     geom_boxplot()+
     theme(legend.position="none") 
 ```
+
+![](/posts/xG-vs-Possession/plot.png)
 
 Consider the table and the plot above. In the table, we have each of the top 10 teams in the English Premier League, season 2021-2022. For each team, I computed the total xG they generated throughout the season, using data from fbref. In the plot, we have the same teams, except for each one we have a boxplot of the xG's they generated in each game of the season. In both cases, teams are ordered by their final position in the league. 
 

@@ -1,11 +1,145 @@
 ---
-title: "xG vs Possesion"
+title: "Beyond xG tables"
 author: "Nicolas Escobar"
 date: "8/19/2022"
 categories: [soccer, analytics, xG]
 ---
 
-# Intro 
+xG has changed the soccer analytics landscape, there is no question about it. It's such a good metric. It's easy to explain and it is widely available. It has allowed us to quantify offensive output and by doing so, it has advanced our understanding of all aspects of the game. It's also so intuitive that it has gone mainstream. It's now part of the conversation in regular soccer coverage. 
 
-There are more things in heaven 
+The thing with it is the same thing that happens with stuff like $R^2$ or $p$-values. It's just a number. A summary statistic. But people sometimes forget about that and expect xG to tell the whole story. It's true: xG paints a much better picture of a game than goals or shots on target. But it's still not the whole picture. The context around which it is discussed matters. 
 
+```{r}
+#| echo: false
+#| warning: false
+#| output: false
+
+library(dplyr)
+library(lme4)
+library(ggplot2)
+
+mancity = read.csv("mancity.csv")
+liverpool = read.csv("liverpool.csv")
+chelsea = read.csv("chelsea.csv")
+tottenham = read.csv("tottenham.csv")
+arsenal = read.csv("arsenal.csv")
+manunited = read.csv("manunited.csv")
+westham = read.csv("westham.csv")
+leicester = read.csv("leicester.csv")
+brighton = read.csv("brighton.csv")
+wolves = read.csv("wolves.csv")
+
+mancity$team = "mancity"
+liverpool$team = "liverpool"
+chelsea$team = "chelsea"
+tottenham$team = "tottenham"
+arsenal$team = "arsenal"
+manunited$team = "manunited"
+westham$team = "westham"
+leicester$team = "leicester"
+brighton$team  = "brighton"
+wolves$team = "wolves"
+
+
+
+
+top10 = bind_rows(mancity, liverpool, chelsea, tottenham, arsenal, manunited, westham, leicester, brighton, wolves)
+top10$team = as.factor(top10$team)
+
+top10 = top10 %>% 
+    mutate(team = factor(team, levels = c("mancity", "liverpool", "chelsea", "tottenham", "arsenal", "manunited", "westham", "leicester", "brighton", "wolves")))
+
+top4 = top10 %>% filter(team == "mancity" | team =="liverpool" |team =="chelsea"|team =="tottenham")
+
+```
+
+```{r}
+#| echo: false
+top10 %>% 
+    group_by(team) %>%
+    summarise(xG = sum(xG))
+```
+
+
+```{r}
+#| echo: false
+#| warning: false
+
+ggplot(top10, aes(x = team, y = xG, fill = team)) +
+    geom_boxplot()+
+    theme(legend.position="none") 
+```
+
+Consider the table and the plot above. In the table, we have each of the top 10 teams in the English Premier League, season 2021-2022. For each team, I computed the total xG they generated throughout the season, using data from fbref. In the plot, we have the same teams, except for each one we have a boxplot of the xG's they generated in each game of the season. In both cases, teams are ordered by their final position in the league. 
+
+It's not like the table and the plot tell completely different stories. Generally speaking, a higher total xG was associated with a better position in the table. And the total xG of Manchester City and Liverpool were noticeably higher than that of the rest of the teams. 
+
+But the table can be just a little misleading. It seems to indicate that Liverpool had basically the same offensive output across the season. But the plot tells a more complicated story. We can infer from the boxplots that Manchester City's distribution of xG is skewed to the right whereas Liverpool's is skewed to the left. This means that the former achieved its total xG by creating a lot of it in a few games while having many games with lower tolls. On the other hand, the latter got it by creating high xG more consistently. 
+
+All of this to say: xG is great, but just quoting xG tables is lazy. It hides part of the story, especially when there is variance involved. Plots are usually a good alternative, but they also have their limitations. Soccer is complex, that's part of the beauty, and it can not be reduced to a number. 
+
+
+
+
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- #| warning: false -->
+
+<!-- top10 %>% -->
+<!--     ggplot(aes(x = team, y = Poss, fill = team)) + -->
+<!--         geom_boxplot()+ -->
+<!--         theme(legend.position="none")  -->
+
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- #| warning: false -->
+<!-- #| output: false -->
+
+<!-- top10 %>%  -->
+<!--     group_by(team) %>% -->
+<!--     summarise(sdXG = IQR(xG)) -->
+
+<!-- ``` -->
+
+
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- #| warning: false -->
+<!-- #| output: false -->
+
+<!-- ggplot(top4, aes(x = Poss, y = xG)) + -->
+<!--     geom_point() + -->
+<!--     facet_wrap(~team) -->
+
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- #| warning: false -->
+<!-- #| output: false -->
+
+
+<!-- ################## -->
+
+
+<!-- M0 = lmer(xG ~ 1 + (Poss - 1|team), top10) -->
+<!-- M0 -->
+<!-- summary(M0) -->
+<!-- coef(M0) -->
+
+
+<!-- ######## -->
+
+<!-- m.mancity = lm(xG ~ Poss , mancity) -->
+<!-- m.mancity -->
+
+
+<!-- ###### -->
+
+<!-- model = lm(xG ~ Poss +team, top10) -->
+<!-- summary(model) -->
+<!-- ``` -->
+
+<!-- ![](/posts/xG-vs-Possession/xgagainstpossesion.png) -->
